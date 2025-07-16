@@ -1,0 +1,12 @@
+Voici le schéma à suivre pour la galerie Unsplash. Merci de me donner plus de détails sur les fonctionnalités ou l'organisation si besoin.
+
+(Si vous souhaitez que je lise et analyse le schéma, je peux le faire. Voulez-vous que je vous propose une structure de base pour la galerie Unsplash ?)
+
+---
+
+Pour commencer, il faut :
+1. Créer une page principale qui affiche une grille de photos Unsplash.
+2. Utiliser l'API Unsplash pour récupérer les images.
+3. Organiser le code selon le schéma (à lire dans artvibeschema.png).
+
+Je vais lire le schéma pour proposer la structure adaptée.
