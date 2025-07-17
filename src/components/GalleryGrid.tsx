@@ -28,7 +28,9 @@ export default function GalleryGrid() {
 
   return (
     <section
-      className={`px-4 py-8 ${theme === "dark" ? "bg-gray-900" : "bg-white"}`}
+      className={`px-4 py-3 sm:py-8 ${
+        theme === "dark" ? "bg-gray-900" : "bg-white"
+      }`}
     >
       {photos.length === 0 ? (
         <p>Loading...</p>
@@ -50,7 +52,7 @@ export default function GalleryGrid() {
                   width={photo.width}
                   height={photo.height}
                   style={{ objectFit: "cover", width: "100%", height: "auto" }}
-                  className="rounded-lg"
+                  className="rounded-lg max-h-64 sm:max-h-none"
                   priority={false}
                 />
               </div>
