@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <header
       className="
-        flex items-center justify-between px-6 py-4 rounded-b-xl shadow-lg transition-all duration-500
+        flex items-center justify-between px-6 py-4 shadow-lg transition-all duration-500
         bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white
         dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 dark:text-white
       "
@@ -18,7 +18,7 @@ const Header = () => {
         <FaCamera size={32} className="opacity-80" />
         <span className="font-bold text-xl tracking-wide">ArtVibe</span>
       </div>
-      <h1 className="font-extrabold text-2xl tracking-tight drop-shadow-lg">
+      <h1 className="hidden sm:block font-extrabold text-2xl tracking-tight drop-shadow-lg">
         Galerie Unsplash
       </h1>
       <button

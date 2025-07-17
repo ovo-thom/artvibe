@@ -1,13 +1,32 @@
 const apiKey = process.env.NEXT_PUBLIC_UNSPLASH_KEY;
 
-const searchPhotos = async (): Promise<void> => {
-  const query = "chat";
-  const perPage = 9;
+export interface Photo {
+  id: string;
+  alt_description: string | null;
+  width: number;
+  height: number;
+  urls: {
+    small: string;
+    regular: string;
+    full: string;
+    [key: string]: string;
+  };
+}
+
+const searchPhotos = async (): Promise<Photo[]> => {
+  const query = "voyage";
+  const perPage = 12;
 
   const res = await fetch(
     `https://api.unsplash.com/search/photos?query=${query}&per_page=${perPage}&client_id=${apiKey}`
   );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch photos");
+  }
+
   const data = await res.json();
-  console.log(data);
+  return data.results;
 };
+
 export default searchPhotos;
