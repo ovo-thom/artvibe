@@ -1,8 +1,16 @@
+"use client";
+import { useTheme } from "./theme-context";
+
 const themes = ["Nature", "Animal", "Travel", "Art", "People"];
 
 export default function ThemeFilters() {
+  const { theme } = useTheme();
   return (
-    <section className="flex flex-col items-center gap-6 py-8 mx-5">
+    <section
+      className={`flex flex-col items-center gap-6 py-8 px-5 ${
+        theme === "dark" ? "bg-gray-900" : "bg-white"
+      }`}
+    >
       <div className="flex flex-wrap gap-3 justify-center">
         {themes.map((theme) => (
           <button
