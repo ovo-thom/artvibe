@@ -1,4 +1,4 @@
-const apiKey = process.env.NEXT_PUBLIC_UNSPLASH_KEY;
+export const apiKey = process.env.NEXT_PUBLIC_UNSPLASH_KEY;
 
 export interface Photo {
   id: string;

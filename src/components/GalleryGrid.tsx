@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-import searchPhotos from "@/lib/unsplash";
 import Image from "next/image";
-import { Photo } from "@/lib/unsplash";
 import Masonry from "react-masonry-css";
 import { useTheme } from "./theme-context";
+import { apiKey } from "@/lib/unsplash";
+import type { Photo } from "@/lib/unsplash";
 
 const breakpointColumnsObj = {
   default: 5,
@@ -14,17 +14,37 @@ const breakpointColumnsObj = {
   400: 1,
 };
 
-export default function GalleryGrid() {
+interface GalleryGridProps {
+  selectedTheme: string;
+}
+
+export default function GalleryGrid({ selectedTheme }: GalleryGridProps) {
   const { theme } = useTheme();
   const [photos, setPhotos] = useState<Photo[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    async function fetchPhotos() {
-      const results = await searchPhotos();
-      setPhotos(results);
+    if (!selectedTheme) {
+      setPhotos([]);
+      return;
     }
+    setLoading(true);
+    const fetchPhotos = async () => {
+      const perPage = 12;
+      const res = await fetch(
+        `https://api.unsplash.com/search/photos?query=${selectedTheme}&per_page=${perPage}&client_id=${apiKey}`
+      );
+      if (!res.ok) {
+        setPhotos([]);
+        setLoading(false);
+        return;
+      }
+      const data = await res.json();
+      setPhotos(data.results);
+      setLoading(false);
+    };
     fetchPhotos();
-  }, []);
+  }, [selectedTheme]);
 
   return (
     <section
@@ -32,8 +52,12 @@ export default function GalleryGrid() {
         theme === "dark" ? "bg-gray-900" : "bg-white"
       }`}
     >
-      {photos.length === 0 ? (
+      {loading ? (
         <p>Loading...</p>
+      ) : photos.length === 0 && selectedTheme ? (
+        <p className="text-center text-gray-400">
+          Aucune image trouvée ou en cours de chargement...
+        </p>
       ) : (
         <div className="w-full max-w-[1200px] mx-auto">
           <Masonry
@@ -41,9 +65,9 @@ export default function GalleryGrid() {
             className="flex gap-4"
             columnClassName="masonry-column"
           >
-            {photos.map((photo) => (
+            {photos.map((photo, index) => (
               <div
-                key={photo.id}
+                key={photo.id + "-" + index}
                 className="mb-4 rounded-lg overflow-hidden relative transition-transform duration-300 hover:scale-105"
               >
                 <Image
