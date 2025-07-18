@@ -3,6 +3,7 @@ export const apiKey = process.env.NEXT_PUBLIC_UNSPLASH_KEY;
 export interface Photo {
   id: string;
   alt_description: string | null;
+  description?: string | null;
   width: number;
   height: number;
   urls: {

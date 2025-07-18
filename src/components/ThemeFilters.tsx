@@ -8,6 +8,7 @@ const themes = ["Nature", "Animal", "Travel", "Art", "People"];
 export default function ThemeFilters() {
   const { theme } = useTheme();
   const [selectedTheme, setSelectedTheme] = useState("Nature");
+  const [inputsearch, setInputSearch] = useState("");
 
   return (
     <section
@@ -28,11 +29,12 @@ export default function ThemeFilters() {
         ))}
       </div>
       <input
-        type="text"
+        type="search"
+        onChange={(e) => setInputSearch(e.target.value)}
         placeholder="Rechercher une photo..."
         className="w-full max-w-md px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
       />
-      <GalleryGrid selectedTheme={selectedTheme} />
+      <GalleryGrid selectedTheme={selectedTheme} inputSearch={inputsearch} />
     </section>
   );
 }

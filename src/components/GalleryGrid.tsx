@@ -16,12 +16,18 @@ const breakpointColumnsObj = {
 
 interface GalleryGridProps {
   selectedTheme: string;
+  inputSearch: string;
 }
 
-export default function GalleryGrid({ selectedTheme }: GalleryGridProps) {
+export default function GalleryGrid({
+  selectedTheme,
+  inputSearch,
+}: GalleryGridProps) {
   const { theme } = useTheme();
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [loading, setLoading] = useState(false);
+
+  console.log(photos);
 
   useEffect(() => {
     if (!selectedTheme) {
@@ -46,6 +52,12 @@ export default function GalleryGrid({ selectedTheme }: GalleryGridProps) {
     fetchPhotos();
   }, [selectedTheme]);
 
+  const filteredPhotos = photos.filter(
+    (photo) =>
+      inputSearch.trim() === "" ||
+      photo.description?.toLowerCase().includes(inputSearch.toLowerCase())
+  );
+
   return (
     <section
       className={`px-4 py-3 sm:py-8 ${
@@ -54,7 +66,7 @@ export default function GalleryGrid({ selectedTheme }: GalleryGridProps) {
     >
       {loading ? (
         <p>Loading...</p>
-      ) : photos.length === 0 && selectedTheme ? (
+      ) : filteredPhotos.length === 0 && selectedTheme ? (
         <p className="text-center text-gray-400">
           Aucune image trouvée ou en cours de chargement...
         </p>
@@ -65,7 +77,7 @@ export default function GalleryGrid({ selectedTheme }: GalleryGridProps) {
             className="flex gap-4"
             columnClassName="masonry-column"
           >
-            {photos.map((photo, index) => (
+            {filteredPhotos.map((photo, index) => (
               <div
                 key={photo.id + "-" + index}
                 className="mb-4 rounded-lg overflow-hidden relative transition-transform duration-300 hover:scale-105"
