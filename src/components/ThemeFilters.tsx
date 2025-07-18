@@ -13,7 +13,7 @@ export default function ThemeFilters() {
   return (
     <section
       className={`flex flex-col items-center gap-6 py-8 px-5 ${
-        theme === "dark" ? "bg-gray-900" : "bg-white"
+        theme === "dark" ? "bg-gray-900" : "bg-gray-50"
       }`}
     >
       <div className="flex flex-wrap gap-3 justify-center">

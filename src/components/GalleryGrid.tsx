@@ -60,8 +60,9 @@ export default function GalleryGrid({
 
   return (
     <section
+      id="gallery-section"
       className={`px-4 py-3 sm:py-8 ${
-        theme === "dark" ? "bg-gray-900" : "bg-white"
+        theme === "dark" ? "bg-gray-900" : "bg-gray-50"
       }`}
     >
       {loading ? (

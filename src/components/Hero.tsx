@@ -19,9 +19,12 @@ const Hero = () => {
           Découvre des photos inspirantes issues d’Unsplash, filtrées par thèmes
           et accessibles en un clic.
         </p>
-        <button className="px-8 py-3 rounded-full bg-white/20 hover:bg-white/40 text-white font-bold text-lg transition-colors duration-300 shadow-lg">
+        <a
+          href="#gallery-section"
+          className="px-8 py-3 rounded-full cursor-pointer bg-white/20 hover:bg-white/40 text-white font-bold text-lg transition-colors duration-300 shadow-lg"
+        >
           Explorer la galerie
-        </button>
+        </a>
       </div>
     </section>
   );
